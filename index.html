@@ -1,349 +1,139 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <meta name="format-detection" content="telephone=no">
-  <title>Synergia Planner 2.0</title>
-  <style>
-    :root{
-      --bg:#f4f7fb;
-      --card:#ffffff;
-      --text:#13233a;
-      --muted:#617086;
-      --primary:#0b6bcb;
-      --primary2:#07539d;
-      --ok:#168a56;
-      --warn:#c98200;
-      --border:#dbe3ee;
-      --shadow:0 10px 30px rgba(26,54,93,.10);
-    }
-    *{box-sizing:border-box}
-    html{-webkit-text-size-adjust:100%}
-    body{
-      margin:0;
-      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
-      background:var(--bg);
-      color:var(--text);
-      padding:max(14px,env(safe-area-inset-top)) 14px max(24px,env(safe-area-inset-bottom));
-    }
-    .app{max-width:760px;margin:0 auto}
-    .hero{
-      background:linear-gradient(145deg,#0d66b9,#083b72);
-      color:#fff;border-radius:22px;padding:22px 20px;
-      box-shadow:var(--shadow);margin-bottom:14px
-    }
-    .hero h1{font-size:25px;line-height:1.15;margin:0 0 6px}
-    .hero p{margin:0;opacity:.9;font-size:14px}
-    .card{
-      background:var(--card);border:1px solid var(--border);border-radius:20px;
-      padding:18px;box-shadow:var(--shadow);margin-bottom:14px
-    }
-    .section-title{font-size:18px;margin:0 0 14px}
-    .grid{display:grid;grid-template-columns:1fr;gap:13px}
-    @media(min-width:650px){.grid.two{grid-template-columns:1fr 1fr}}
-    label{display:block;font-weight:700;font-size:14px;margin-bottom:6px}
-    .hint{display:block;color:var(--muted);font-size:12px;margin-top:5px;line-height:1.35}
-    input,select{
-      width:100%;min-height:50px;border:1px solid var(--border);border-radius:13px;
-      padding:12px 13px;font-size:17px;background:#fff;color:var(--text);
-      -webkit-appearance:none;appearance:none
-    }
-    input:focus,select:focus{outline:3px solid rgba(11,107,203,.15);border-color:var(--primary)}
-    .actions{display:grid;grid-template-columns:1fr;gap:10px;margin-top:16px}
-    @media(min-width:560px){.actions{grid-template-columns:1.4fr 1fr 1fr}}
-    button{
-      width:100%;min-height:52px;border:0;border-radius:14px;padding:12px 14px;
-      font-size:17px;font-weight:800;cursor:pointer;touch-action:manipulation
-    }
-    .primary{background:var(--primary);color:#fff}
-    .primary:active{background:var(--primary2);transform:scale(.995)}
-    .secondary{background:#e9f2fb;color:#0b5da8}
-    .ghost{background:#edf1f6;color:#30445c}
-    .result{display:none}
-    .result.show{display:block}
-    .big{
-      font-size:34px;line-height:1.1;font-weight:900;color:var(--primary);
-      margin:4px 0 2px;word-break:break-word
-    }
-    .sub{color:var(--muted);font-size:13px;margin-bottom:16px}
-    .metrics{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-    .metric{background:#f6f9fd;border:1px solid var(--border);border-radius:14px;padding:13px}
-    .metric b{display:block;font-size:20px;margin-top:4px}
-    .metric span{font-size:12px;color:var(--muted)}
-    .status{
-      margin-top:14px;padding:13px 14px;border-radius:14px;
-      background:#eef8f3;color:#116b44;font-weight:700;line-height:1.35
-    }
-    .error{
-      display:none;margin-top:12px;background:#fff1f1;color:#9b1c1c;
-      padding:12px 14px;border-radius:13px;font-weight:700
-    }
-    .error.show{display:block}
-    .fine{font-size:11px;color:var(--muted);line-height:1.45;margin-top:12px}
-    .footer{text-align:center;color:var(--muted);font-size:12px;padding:8px}
-    @media print{
-      body{background:#fff;padding:0}
-      .hero,.inputs,.footer{display:none!important}
-      .card{box-shadow:none;border:none;margin:0;padding:20px}
-      .result{display:block!important}
-      .actions{display:none!important}
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Synergia Planner v2.1</title>
+<style>
+body{font-family:Arial,sans-serif;background:#f4f7fb;margin:0;color:#222}
+header{background:#0b4f8a;color:#fff;padding:18px;text-align:center}
+.container{max-width:900px;margin:auto;padding:20px}
+.card{background:#fff;border-radius:10px;padding:18px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.1)}
+label{display:block;margin-top:12px;font-weight:bold}
+input{width:100%;padding:10px;border:1px solid #ccc;border-radius:6px}
+button{margin-top:18px;padding:12px 20px;border:none;border-radius:6px;background:#0b4f8a;color:#fff;font-size:16px;cursor:pointer}
+.result{margin-top:20px;padding:15px;background:#eef6ff;border-radius:8px}
+.badge{font-weight:bold;padding:8px 14px;border-radius:20px;color:#fff;display:inline-block}
+.green{background:#2e7d32}.yellow{background:#f9a825}.red{background:#c62828}
+small{color:#666}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
-<div class="app">
-  <section class="hero">
-    <h1>Synergia Planner 2.0</h1>
-    <p>Calculadora de retiro optimizada para iPhone y sin dependencias externas.</p>
-  </section>
+<header>
+<h1>Synergia Planner v2.1</h1>
+<p>Planeación Estratégica para el Retiro</p>
+</header>
 
-  <section class="card inputs">
-    <h2 class="section-title">Datos del cliente</h2>
+<div class="container">
+<div class="card">
+<h2>Diseñar mi Plan de Retiro</h2>
 
-    <div class="grid two">
-      <div>
-        <label for="nombre">Nombre</label>
-        <input id="nombre" type="text" autocomplete="name" placeholder="Ej. Carolina">
-      </div>
-      <div>
-        <label for="edad">Edad actual</label>
-        <input id="edad" type="number" inputmode="numeric" min="18" max="64" value="40">
-      </div>
-      <div>
-        <label for="retiro">Edad de retiro</label>
-        <select id="retiro">
-          <option value="60">60 años</option>
-          <option value="65" selected>65 años</option>
-        </select>
-      </div>
-      <div>
-        <label for="meta">Pensión mensual deseada</label>
-        <input id="meta" type="number" inputmode="decimal" min="1000" step="500" value="30000">
-        <span class="hint">En pesos de hoy.</span>
-      </div>
-      <div>
-        <label for="ahorro">Ahorro mensual disponible</label>
-        <input id="ahorro" type="number" inputmode="decimal" min="0" step="500" value="5000">
-      </div>
-      <div>
-        <label for="incremento">Incremento anual de aportación</label>
-        <input id="incremento" type="number" inputmode="decimal" min="0" max="20" step="0.5" value="4">
-        <span class="hint">Porcentaje anual.</span>
-      </div>
-      <div>
-        <label for="rendimiento">Rendimiento real estimado</label>
-        <input id="rendimiento" type="number" inputmode="decimal" min="0" max="15" step="0.5" value="5">
-        <span class="hint">Después de inflación.</span>
-      </div>
-      <div>
-        <label for="retiroTasa">Tasa de retiro anual</label>
-        <input id="retiroTasa" type="number" inputmode="decimal" min="2" max="10" step="0.25" value="5">
-        <span class="hint">Supuesto para convertir capital en ingreso.</span>
-      </div>
-    </div>
+<label>Nombre</label>
+<input id="nombre">
 
-    <div id="error" class="error" role="alert"></div>
+<label>Edad actual</label>
+<input id="edad" type="number" value="35">
 
-    <div class="actions">
-      <button id="calcular" class="primary" type="button">Calcular</button>
-      <button id="compartir" class="secondary" type="button">Compartir</button>
-      <button id="imprimir" class="ghost" type="button">Guardar PDF</button>
-    </div>
-  </section>
+<label>Edad de retiro</label>
+<input id="retiro" type="number" value="65">
 
-  <section id="resultado" class="card result" aria-live="polite">
-    <h2 class="section-title">Proyección de retiro</h2>
-    <div id="clienteLinea" class="sub"></div>
+<label>Pensión mensual deseada (pesos de hoy)</label>
+<input id="pension" type="number" value="30000">
 
-    <div class="sub">Ahorro mensual sugerido desde hoy</div>
-    <div id="ahorroSugerido" class="big">$0</div>
-    <div id="brechaLinea" class="sub"></div>
+<label>Ahorro mensual</label>
+<input id="ahorro" type="number" value="5000">
 
-    <div class="metrics">
-      <div class="metric"><span>Capital objetivo</span><b id="capitalObjetivo">$0</b></div>
-      <div class="metric"><span>Capital proyectado</span><b id="capitalProyectado">$0</b></div>
-      <div class="metric"><span>Pensión estimada</span><b id="pensionEstimada">$0</b></div>
-      <div class="metric"><span>Años para retiro</span><b id="anios">0</b></div>
-    </div>
+<label>Saldo inicial</label>
+<input id="saldo" type="number" value="0">
 
-    <div id="estatus" class="status"></div>
-    <div class="fine">
-      Proyección ilustrativa. No constituye garantía de rendimiento, recomendación fiscal,
-      oferta contractual ni dictamen financiero. Los resultados dependen de los supuestos capturados.
-    </div>
-  </section>
+<button onclick="calcular()">Diseñar mi Plan</button>
+<button onclick="generarPDF()">Generar PDF</button>
 
-  <div class="footer">Synergia Capital · Herramienta de apoyo para asesoría</div>
+<div id="salida" class="result" style="display:none"></div>
+
+<small>Supuestos internos: Rendimiento nominal 10%, inflación 4%, incremento anual de aportaciones 4%, referencia Allianz Dinámico USD.</small>
+</div>
 </div>
 
 <script>
-(function () {
-  "use strict";
+let ultimo="";
 
-  function $(id){ return document.getElementById(id); }
+function dinero(v){
+ return new Intl.NumberFormat('es-MX',{style:'currency',currency:'MXN'}).format(v);
+}
 
-  function num(id){
-    var raw = $(id).value;
-    var n = Number(String(raw).replace(",", "."));
-    return isFinite(n) ? n : NaN;
-  }
+function calcular(){
 
-  function money(n){
-    try{
-      return new Intl.NumberFormat("es-MX",{
-        style:"currency",currency:"MXN",maximumFractionDigits:0
-      }).format(n);
-    }catch(e){
-      return "$" + Math.round(n).toLocaleString("es-MX");
-    }
-  }
+ const edad=+edadEl().value;
+ const retiro=+retiroEl().value;
+ const pension=+pensionEl().value;
+ const ahorro=+ahorroEl().value;
+ const saldo=+saldoEl().value;
 
-  function futureValueGrowingMonthly(payment, years, annualReturn, annualGrowth){
-    var months = Math.max(0, Math.round(years * 12));
-    var monthlyReturn = Math.pow(1 + annualReturn, 1/12) - 1;
-    var total = 0;
-    for(var m=0; m<months; m++){
-      var yearIndex = Math.floor(m/12);
-      var monthlyPayment = payment * Math.pow(1 + annualGrowth, yearIndex);
-      total = total * (1 + monthlyReturn) + monthlyPayment;
-    }
-    return total;
-  }
+ const años=retiro-edad;
 
-  function paymentForTarget(target, years, annualReturn, annualGrowth){
-    var fvPerPeso = futureValueGrowingMonthly(1, years, annualReturn, annualGrowth);
-    return fvPerPeso > 0 ? target / fvPerPeso : 0;
-  }
+ const r=0.10/12;
+ const n=años*12;
 
-  function validate(){
-    var edad = num("edad");
-    var retiro = num("retiro");
-    var meta = num("meta");
-    var ahorro = num("ahorro");
-    var incremento = num("incremento");
-    var rendimiento = num("rendimiento");
-    var retiroTasa = num("retiroTasa");
+ let futuroSaldo=saldo*Math.pow(1+r,n);
 
-    var msg = "";
-    if(!isFinite(edad) || edad < 18 || edad >= retiro) msg = "La edad actual debe ser menor que la edad de retiro.";
-    else if(!isFinite(meta) || meta <= 0) msg = "Captura una pensión mensual deseada mayor a cero.";
-    else if(!isFinite(ahorro) || ahorro < 0) msg = "El ahorro mensual no puede ser negativo.";
-    else if(!isFinite(incremento) || incremento < 0 || incremento > 20) msg = "El incremento anual debe estar entre 0% y 20%.";
-    else if(!isFinite(rendimiento) || rendimiento < 0 || rendimiento > 15) msg = "El rendimiento real debe estar entre 0% y 15%.";
-    else if(!isFinite(retiroTasa) || retiroTasa <= 0) msg = "La tasa de retiro debe ser mayor a cero.";
+ for(let i=0;i<n;i++){
+    futuroSaldo+=ahorro*Math.pow(1+r,n-i);
+ }
 
-    $("error").textContent = msg;
-    $("error").className = msg ? "error show" : "error";
-    return msg ? null : {
-      edad:edad,retiro:retiro,meta:meta,ahorro:ahorro,
-      incremento:incremento/100,rendimiento:rendimiento/100,
-      retiroTasa:retiroTasa/100
-    };
-  }
+ const capitalHoy=pension*180;
+ const capitalRetiro=capitalHoy*Math.pow(1.04,años);
 
-  function calculate(){
-    var d = validate();
-    if(!d) return;
+ let estado="REQUIERE REESTRUCTURA",clase="red";
 
-    var years = d.retiro - d.edad;
-    var annualIncome = d.meta * 12;
-    var target = annualIncome / d.retiroTasa;
-    var projected = futureValueGrowingMonthly(d.ahorro, years, d.rendimiento, d.incremento);
-    var suggested = paymentForTarget(target, years, d.rendimiento, d.incremento);
-    var estimatedPension = projected * d.retiroTasa / 12;
-    var gap = suggested - d.ahorro;
-    var progress = target > 0 ? Math.min(999, projected / target * 100) : 0;
-    var name = $("nombre").value.trim();
+ if(futuroSaldo>=capitalRetiro){
+   estado="EN RUTA";
+   clase="green";
+ }else if(futuroSaldo>=capitalRetiro*.80){
+   estado="REQUIERE AJUSTE";
+   clase="yellow";
+ }
 
-    $("clienteLinea").textContent = (name ? name + " · " : "") +
-      "Retiro estimado a los " + d.retiro + " años.";
+ const dif=capitalRetiro-futuroSaldo;
 
-    $("ahorroSugerido").textContent = money(suggested);
-    $("capitalObjetivo").textContent = money(target);
-    $("capitalProyectado").textContent = money(projected);
-    $("pensionEstimada").textContent = money(estimatedPension) + "/mes";
-    $("anios").textContent = years;
+ ultimo=`
+ <h3>Resultado</h3>
+ <p><b>Capital requerido hoy:</b> ${dinero(capitalHoy)}</p>
+ <p><b>Capital requerido al retiro:</b> ${dinero(capitalRetiro)}</p>
+ <p><b>Capital proyectado:</b> ${dinero(futuroSaldo)}</p>
+ <p><b>Diferencia:</b> ${dinero(dif)}</p>
+ <p><span class="badge ${clase}">${estado}</span></p>
+ <p><b>Recomendación:</b> ${
+ estado=="EN RUTA"?
+ "Continúe con el plan y realice una revisión anual.":
+ estado=="REQUIERE AJUSTE"?
+ "Considere incrementar su ahorro mensual o extender la edad de retiro.":
+ "Es recomendable rediseñar el plan incrementando el ahorro y revisando el objetivo."
+ }</p>`;
 
-    if(gap > 50){
-      $("brechaLinea").textContent = "Faltaría aumentar aproximadamente " + money(gap) + " al mes.";
-      $("estatus").textContent = "Avance estimado: " + progress.toFixed(0) +
-        "%. Hay una brecha, pero ya tienes una ruta clara para cerrarla.";
-      $("estatus").style.background = "#fff7e8";
-      $("estatus").style.color = "#8a5900";
-    } else {
-      $("brechaLinea").textContent = "La aportación actual alcanza o supera el ahorro sugerido.";
-      $("estatus").textContent = "Avance estimado: " + progress.toFixed(0) +
-        "%. La estrategia va alineada con la meta capturada.";
-      $("estatus").style.background = "#eef8f3";
-      $("estatus").style.color = "#116b44";
-    }
+ document.getElementById("salida").style.display="block";
+ document.getElementById("salida").innerHTML=ultimo;
+}
 
-    $("resultado").className = "card result show";
-    try{
-      localStorage.setItem("synergiaPlanner", JSON.stringify({
-        nombre:$("nombre").value, edad:$("edad").value, retiro:$("retiro").value,
-        meta:$("meta").value, ahorro:$("ahorro").value, incremento:$("incremento").value,
-        rendimiento:$("rendimiento").value, retiroTasa:$("retiroTasa").value
-      }));
-    }catch(e){}
-
-    setTimeout(function(){
-      $("resultado").scrollIntoView({behavior:"smooth",block:"start"});
-    },50);
-  }
-
-  function share(){
-    if(!$("resultado").classList.contains("show")) calculate();
-    if(!$("resultado").classList.contains("show")) return;
-
-    var text =
-      "Proyección Synergia\n" +
-      ($("clienteLinea").textContent ? $("clienteLinea").textContent + "\n" : "") +
-      "Ahorro mensual sugerido: " + $("ahorroSugerido").textContent + "\n" +
-      "Capital objetivo: " + $("capitalObjetivo").textContent + "\n" +
-      "Capital proyectado: " + $("capitalProyectado").textContent + "\n" +
-      "Pensión estimada: " + $("pensionEstimada").textContent + "\n\n" +
-      "Proyección ilustrativa sujeta a los supuestos capturados.";
-
-    if(navigator.share){
-      navigator.share({title:"Proyección Synergia",text:text}).catch(function(){});
-    }else{
-      var url = "https://wa.me/?text=" + encodeURIComponent(text);
-      window.location.href = url;
-    }
-  }
-
-  function restore(){
-    try{
-      var saved = JSON.parse(localStorage.getItem("synergiaPlanner") || "null");
-      if(!saved) return;
-      Object.keys(saved).forEach(function(k){
-        if($(k)) $(k).value = saved[k];
-      });
-    }catch(e){}
-  }
-
-  $("calcular").addEventListener("click", function(e){
-    e.preventDefault();
-    calculate();
-  }, false);
-
-  $("compartir").addEventListener("click", function(e){
-    e.preventDefault();
-    share();
-  }, false);
-
-  $("imprimir").addEventListener("click", function(e){
-    e.preventDefault();
-    if(!$("resultado").classList.contains("show")) calculate();
-    if($("resultado").classList.contains("show")) window.print();
-  }, false);
-
-  restore();
-})();
+function generarPDF(){
+ if(!ultimo){calcular();}
+ const {jsPDF}=window.jspdf;
+ const doc=new jsPDF();
+ doc.setFontSize(18);
+ doc.text("Synergia Planner v2.1",20,20);
+ doc.setFontSize(12);
+ doc.text("Planeación Estratégica para el Retiro",20,30);
+ const txt=document.getElementById("salida").innerText.split("\n");
+ let y=45;
+ txt.forEach(t=>{doc.text(t,20,y);y+=8;});
+ doc.save("SynergiaPlanner.pdf");
+}
+const edadEl=()=>document.getElementById("edad");
+const retiroEl=()=>document.getElementById("retiro");
+const pensionEl=()=>document.getElementById("pension");
+const ahorroEl=()=>document.getElementById("ahorro");
+const saldoEl=()=>document.getElementById("saldo");
 </script>
 </body>
 </html>
